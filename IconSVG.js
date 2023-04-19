@@ -17,4 +17,4 @@ function IconSVG({ id, character, font, charColor, circleColor }) {
   );
 }
 
-export default IconSVG;
+window.IconSVG = IconSVG;
