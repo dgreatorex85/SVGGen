@@ -1,7 +1,4 @@
-import { css } from 'https://unpkg.com/@emotion/css@11.1.3/dist/umd/index.js';
-import React from 'https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js';
-import ReactDOM from 'https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js';
-import IconSVG from './IconSVG.js';
+const { css } = window.emotion;
 
 const Container = css`
   display: flex;
