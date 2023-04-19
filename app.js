@@ -1,3 +1,8 @@
+import { css } from 'https://unpkg.com/@emotion/css@11.1.3/dist/umd/index.js';
+import React from 'https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js';
+import ReactDOM from 'https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js';
+import IconSVG from './IconSVG.js';
+
 const Container = css`
   display: flex;
   flex-direction: column;
@@ -26,8 +31,6 @@ const Preview = css`
   margin-bottom: 1rem;
 `;
 
-import IconSVG from './IconSVG';
-
 function App() {
   const [character, setCharacter] = React.useState('A');
   const [font, setFont] = React.useState('Arial');
@@ -35,7 +38,14 @@ function App() {
   const [circleColor, setCircleColor] = React.useState('#000000');
 
   function handleDownload() {
-    // ...
+    const svgElement = document.getElementById('icon-svg');
+    const svgString = new XMLSerializer().serializeToString(svgElement);
+    const blob = new Blob([svgString], { type: 'image/svg+xml' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${character}-${font}.svg`;
+    link.click();
   }
 
   return (
@@ -44,6 +54,7 @@ function App() {
       {/* ... */}
       <div className={Preview}>
         <IconSVG
+          id="icon-svg"
           character={character}
           font={font}
           charColor={charColor}
@@ -51,6 +62,7 @@ function App() {
         />
       </div>
       {/* ... */}
+      <button onClick={handleDownload}>Save SVG</button>
     </div>
   );
 }
